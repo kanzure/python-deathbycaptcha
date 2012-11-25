@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-
 # Author: Sergey Kolchin <ksa242@gmail.com>
 
 import base64
@@ -16,6 +15,7 @@ import threading
 import time
 import urllib
 import urllib2
+
 try:
     from json import read as json_decode, write as json_encode
 except ImportError:
@@ -23,7 +23,6 @@ except ImportError:
         from json import loads as json_decode, dumps as json_encode
     except ImportError:
         from simplejson import loads as json_decode, dumps as json_encode
-
 
 # API version and unique software ID
 API_VERSION = 'DBC/Python v4.0.11'
@@ -43,10 +42,8 @@ HTTP_RESPONSE_TYPE = 'application/json'
 SOCKET_HOST = 'api.deathbycaptcha.com'
 SOCKET_PORTS = range(8123, 8131)
 
-
 class AccessDeniedException(Exception):
     pass
-
 
 class Client(object):
     """Death by Captcha API Client"""
@@ -137,7 +134,6 @@ class Client(object):
             if c.get('text') and c.get('is_correct'):
                 return c
 
-
 class HttpClient(Client):
     """Death by Captcha HTTP API client."""
 
@@ -214,7 +210,6 @@ class HttpClient(Client):
         }) or {}
         if response.get('captcha'):
             return response
-
 
 class SocketClient(Client):
     """Death by Captcha socket API client."""
@@ -364,7 +359,6 @@ class SocketClient(Client):
         data = self.userpwd.copy()
         data['captcha'] = cid
         return not self._call('remove', data).get('captcha')
-
 
 if '__main__' == __name__:
     import sys
