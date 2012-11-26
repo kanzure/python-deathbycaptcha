@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-# Author: Sergey Kolchin <ksa242@gmail.com>
 
 import base64
 import binascii
