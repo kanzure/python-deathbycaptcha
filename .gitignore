@@ -1,0 +1,9 @@
+# python egg build directory
+build/
+
+# editor leftovers
+*~
+.*.sw*
+
+# precompiled python files
+*.pyc
