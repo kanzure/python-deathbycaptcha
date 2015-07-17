@@ -55,7 +55,9 @@ class Client(object):
     def _load_file(self, captcha):
         if hasattr(captcha, 'read'):
             raw_captcha = captcha.read()
-        else:
+        elif type(captcha) == bytearray:
+            raw_captcha = captcha
+        elif os.path.isfile(captcha):
             raw_captcha = ''
             try:
                 f = open(captcha, 'rb')
@@ -64,6 +66,10 @@ class Client(object):
             else:
                 raw_captcha = f.read()
                 f.close()
+        else:
+            f_stream = urllib.urlopen(captcha)
+            raw_captcha = f_stream.read()
+            
         if not len(raw_captcha):
             raise ValueError('CAPTCHA image is empty')
         elif imghdr.what(None, raw_captcha) is None:
